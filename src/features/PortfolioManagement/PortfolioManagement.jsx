@@ -210,20 +210,20 @@ export default function PortfolioManagement() {
   }, [portfolios, filterValues]);
 
   /**
-   * Summary KPIs computed from all portfolios.
+   * Summary KPIs computed from filtered portfolios.
    */
   const summaryKPIs = useMemo(() => {
-    if (!portfolios || portfolios.length === 0) {
+    if (!filteredPortfolios || filteredPortfolios.length === 0) {
       return null;
     }
 
-    const totalPortfolios = portfolios.length;
+    const totalPortfolios = filteredPortfolios.length;
     let totalApps = 0;
     let totalQualityScore = 0;
     let totalTestCoverage = 0;
     let totalDefectDensity = 0;
 
-    for (const p of portfolios) {
+    for (const p of filteredPortfolios) {
       totalApps += p.applicationCount || 0;
       totalQualityScore += p.qualityScore || 0;
       totalTestCoverage += p.testCoverage || 0;
@@ -237,7 +237,7 @@ export default function PortfolioManagement() {
       avgTestCoverage: totalPortfolios > 0 ? Math.round((totalTestCoverage / totalPortfolios) * 10) / 10 : 0,
       avgDefectDensity: totalPortfolios > 0 ? Math.round((totalDefectDensity / totalPortfolios) * 100) / 100 : 0,
     };
-  }, [portfolios]);
+  }, [filteredPortfolios]);
 
   /**
    * Handles clicking a portfolio row to open the detail modal.

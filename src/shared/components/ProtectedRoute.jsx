@@ -35,7 +35,7 @@ export default function ProtectedRoute({ requiredFeature, redirectPath, children
   }
 
   if (!isAuthenticated) {
-    return <Navigate to={redirectPath || '/'} state={{ from: location }} replace />;
+    return <Navigate to={redirectPath || '/login'} state={{ from: location }} replace />;
   }
 
   if (requiredFeature && !hasPermission(requiredFeature)) {
@@ -98,6 +98,6 @@ ProtectedRoute.propTypes = {
 
 ProtectedRoute.defaultProps = {
   requiredFeature: undefined,
-  redirectPath: '/',
+  redirectPath: '/login',
   children: undefined,
 };

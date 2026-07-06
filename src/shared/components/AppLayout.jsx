@@ -7,7 +7,7 @@
  */
 
 import { useState, useCallback, useMemo } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Navigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.jsx';
 import Header from './Header.jsx';
 import Sidebar from './Sidebar.jsx';
@@ -59,7 +59,7 @@ export default function AppLayout() {
   }
 
   if (!isAuthenticated) {
-    return <Outlet />;
+    return <Navigate to="/login" replace />;
   }
 
   const sidebarWidth = sidebarCollapsed ? 'lg:pl-16' : 'lg:pl-64';
